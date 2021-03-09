@@ -6,9 +6,9 @@ from gym.utils import seeding
 #import glob
 #import re
 
-class BouncerEnv(gym.Env):
+class GatekeeperEnv(gym.Env):
     def __init__(self):#, params):
-        super(BouncerEnv, self).__init__()
+        super(GatekeeperEnv, self).__init__()
    
     def reset(self):
         return 0

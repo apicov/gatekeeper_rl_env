@@ -1,6 +1,6 @@
 from setuptools import setup,find_packages
 
-setup(name='bouncer_env',
+setup(name='gatekeeper_env',
       version='0.0.1',
       install_requires=['gym'],#And any other dependencies required
       packages=[package for package in find_packages()]
