@@ -29,8 +29,8 @@ RIGHT = 2
 UP = 3
 
 GATEKEEPER_TYPES = ['L','D','R','U'] #idx is equivalent to action required by the gatekeeper type ('L'=0=LEFT,'R'=2=RIGHT)
-GATEKEEPER_LOCATIONS = [(0,2),(1,3)]#(0,2),,(1,3)
-BLOCK_LOCATIONS = [(2,1),(2,2)]
+GATEKEEPER_LOCATIONS = [(0,2),(1,3)]#[(1,3),(0,2)]#(0,2),,(1,3)
+BLOCK_LOCATIONS = [(2,0),(2,2),(2,3)]
 GOAL_LOCATION = (0,3)
 
 CELL_IMAGES = {"-":np.array([[255,255],[255,255]]), "L":np.array([[0,255],[0,255]]), "D":np.array([[255,255],[0,0]]), "R":np.array([[255,0],[255,0]]), "U":np.array([[0,0],[255,255]]), "G":np.array([[0,0],[0,0]])   }
@@ -56,14 +56,14 @@ class GatekeeperEnv(gym.Env):
         self.step_count = 0
         self.map = np.asarray(MAP, dtype='c')
         self.insert_rnd_gatekeepers() #select randomly two gatekeepers from 4 possible types
-        self.curr_img = CELL_IMAGES['-']
         self.insert_blocks(BLOCK_LOCATIONS)
         if init_pos == None:
-            self.curr_loc = self.rnd_start_position(self.map.shape)
-            #self.curr_loc =(3,1) # (3,1) #starting position
+            #self.curr_loc = self.rnd_start_position(self.map.shape)
+            self.curr_loc =(3,3) # (3,1) #starting position
         else:
             self.curr_loc = init_pos
         #self.curr_loc =(3,3) # (3,1) #starting position
+        self.curr_img = CELL_IMAGES[self.map[self.curr_loc[0],self.curr_loc[1]].decode('UTF-8')]
         return (self.curr_img, self.vec2n(self.curr_loc))
       
     def step(self, action):
@@ -77,7 +77,7 @@ class GatekeeperEnv(gym.Env):
                 self.curr_loc= GOAL_LOCATION
                 self.curr_img = CELL_IMAGES['G']
             else: #wrong password, agent loses
-                reward= -0
+                reward= -50
                 self.curr_img = CELL_IMAGES[self.map[self.curr_loc[0],self.curr_loc[1]].decode('UTF-8')]
             self.done = True
         
