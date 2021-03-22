@@ -30,7 +30,7 @@ UP = 3
 
 GATEKEEPER_TYPES = ['L','D','R','U'] #idx is equivalent to action required by the gatekeeper type ('L'=0=LEFT,'R'=2=RIGHT)
 GATEKEEPER_LOCATIONS = [(0,2),(1,3)]#[(1,3),(0,2)]#(0,2),,(1,3)
-BLOCK_LOCATIONS = [(2,0),(2,2),(2,3)]
+BLOCK_LOCATIONS = [(2,1),(2,2)]
 GOAL_LOCATION = (0,3)
 
 CELL_IMAGES = {"-":np.array([[255,255],[255,255]]), "L":np.array([[0,255],[0,255]]), "D":np.array([[255,255],[0,0]]), "R":np.array([[255,0],[255,0]]), "U":np.array([[0,0],[255,255]]), "G":np.array([[0,0],[0,0]])   }
